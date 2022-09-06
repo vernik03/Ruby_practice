@@ -16,18 +16,10 @@ class Calc
     def readInput()
         print "Enter x: "
         @x = gets.chomp.to_f
-        print "Enter a: "
-        @a = gets.chomp.to_f
-        print "Enter b: "
-        @b = gets.chomp.to_f
-        print "Enter c: "
-        @c = gets.chomp.to_f
-        print "Enter angle degree: "
-        @f = gets.chomp.to_f
     end
 
     def countFunction()
-        return ((Math.sin(3*@x)**3 + Math.atan(@f) - 6*10**3.1)/(Math.sqrt(@a*(@x**2) + @b*@x + @c)) + Math::E**@x*((Math.tan(@x+2)).abs))
+        return "https://ru.wikipedia.org/wiki/%D0%A4%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D0%B0_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8_%D0%93%D0%B0%D1%83%D1%81%D1%81%D0%B0"
     end
 end
 
