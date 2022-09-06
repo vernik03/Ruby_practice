@@ -1,5 +1,4 @@
-![image](https://user-images.githubusercontent.com/89276595/188750983-c716987f-39d7-441c-a298-10d3ab1ebfbf.png)
-
+![image](https://user-images.githubusercontent.com/89276595/188756882-f5bed642-e33c-4ed9-8fad-8c8227ee8b64.png)
 
  geogebra = "http://surl.li/cxwwm"
   
