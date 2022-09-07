@@ -1,16 +1,17 @@
-class Calc
+class Polynom
     @@wolfram = "http://surl.li/cxwwf"
     def initialize()
-        @x = 1
-        @a = 2
-        @b = 3
-        @c = 4
-        @f = 40
+        @polynom = [
+            [150,49], [221,78], [219,121], [208,158], [167,182],
+            [108,192], [72,171], [59,133], [76,115], [91,97],
+            [75,78], [67,58], [79,47], [98,30], [118,22],
+            [136,30], [143,37]]
+        # @polynom.each {|x,y| puts "#{x} #{y}"}
     end
 
-    def count(default = false)
+    def square(default = false)
         readInput() if !default
-        return countFunction()
+        return polynomSquareCount()
     end
 
     def readInput()
@@ -18,12 +19,26 @@ class Calc
         @x = gets.chomp.to_f
     end
 
-    def countFunction()
-        return "https://ru.wikipedia.org/wiki/%D0%A4%D0%BE%D1%80%D0%BC%D1%83%D0%BB%D0%B0_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8_%D0%93%D0%B0%D1%83%D1%81%D1%81%D0%B0"
+    def polynomSquareCount()
+        i = 0
+        sum1 = 0
+        sum2 = 0
+        while i < @polynom.count - 1 do
+            sum1 += @polynom[i][0] * @polynom[i+1][1]
+            i += 1
+        end
+        sum1 += @polynom[i][0] * @polynom[0][1]
+        i = 0
+        while i < @polynom.count - 1 do
+            sum2 += @polynom[i+1][0] * @polynom[i][1]
+            i += 1
+        end
+        sum2 += @polynom[0][0] * @polynom[i][1]
+        
+        return (sum1 - sum2).abs/2
     end
 end
 
 
-calc = Calc.new
-puts calc.count(1) #default
-puts calc.count() #custom
+polynom = Polynom.new
+puts polynom.square(1) #default
