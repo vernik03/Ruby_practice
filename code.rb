@@ -6,7 +6,6 @@ class Polynom
             [108,192], [72,171], [59,133], [76,115], [91,97],
             [75,78], [67,58], [79,47], [98,30], [118,22],
             [136,30], [143,37]]
-        # @polynom.each {|x,y| puts "#{x} #{y}"}
     end
 
     def square(default = false)
@@ -15,8 +14,13 @@ class Polynom
     end
 
     def readInput()
-        print "Enter x: "
-        @x = gets.chomp.to_f
+        print "Enter number of vertices: "
+        num = gets.chomp.to_i
+        @polynom = []
+        for i in 1..num
+            print "Enter coordinates for vertex #{i}: "
+            @polynom << gets.chomp.split(" ").map {|x| x.to_i}
+        end
     end
 
     def polynomSquareCount()
@@ -41,4 +45,5 @@ end
 
 
 polynom = Polynom.new
-puts polynom.square(1) #default
+puts "Polynom square = #{polynom.square(1)}" #default
+puts "Polynom square = #{polynom.square()}" #custom
