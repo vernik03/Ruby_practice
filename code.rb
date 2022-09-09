@@ -1,5 +1,5 @@
 class Calc
-    @@wolfram = "http://surl.li/cxwwf"
+    @@wolfram = "https://www.wolframalpha.com/input?i=%28%21%28A+or+B%29+and+%28A+or+%21B%29%29%2C+A%3DTRUE%2C+B%3DFALSE" #?????????????
     def initialize()
         @A = true
         @B = false
