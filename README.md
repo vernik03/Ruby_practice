@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/89276595/188750983-c716987f-39d7-441c-a298-10d3ab1ebfbf.png)
+![image](https://user-images.githubusercontent.com/89276595/189285741-3543268f-0014-42a9-b306-147c47563ca4.png)
 
 
  wolfram = "http://surl.li/cxwwf"
