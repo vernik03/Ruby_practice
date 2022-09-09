@@ -1,5 +1,5 @@
 class Polynom
-    @@wolfram = "http://surl.li/cxwwf"
+    @@geogebra = "http://surl.li/cxwwm"
     def initialize()
         @polynom = [
             [150,49], [221,78], [219,121], [208,158], [167,182],
