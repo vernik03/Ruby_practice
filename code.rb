@@ -9,7 +9,13 @@ class Calc
     end
 
     def count(default = false)
-        readInput() if !default
+        if !default
+            loop do 
+                readInput()
+                break if checkWrongInput()
+                puts "Input numbers again!"
+            end 
+        end
         return countFunction()
     end
 
@@ -24,6 +30,14 @@ class Calc
         @c = gets.chomp.to_f
         print "Enter angle degree: "
         @f = gets.chomp.to_f
+    end
+
+    def checkWrongInput()
+        if (@a*(@x**2) + @b*@x + @c) <= 0
+            puts "Wrong input! a*x^2 + b*x + c must be > 0"
+            return false
+        end
+        return true
     end
 
     def countFunction()
