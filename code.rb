@@ -22,19 +22,25 @@ class Calc
         print "Enter C: "
         @C = gets.chomp.to_b
         print "Enter X: "
-        @X = gets.chomp.to_f
+        @X = gets.chomp.to_i
         print "Enter Y: "
-        @Y = gets.chomp.to_f
+        @Y = gets.chomp.to_i
         print "Enter Z: "
-        @Z = gets.chomp.to_f
+        @Z = gets.chomp.to_i
     end
 
     def printResult()
-        return ((Math.sin(3*@x)**3 + Math.atan(@f) - 6*10**3.1)/(Math.sqrt(@a*(@x**2) + @b*@x + @c)) + Math::E**@x*((Math.tan(@x+2)).abs))
+        puts !(@A || @B) && (@A && !@B)
+        #puts ((@Z != @Y) <= (6 >= @Y) && @A || @B && @C && @X >= 1.5)
+        #puts ((8 – @X * 2 <= @Z) && (@X**2 <= @Y**2) || (@Z >= 15))
+        #puts (@X > 0 && @Y < 0 || @Z >= (@X * @Y - @Y / @X) + (–@Z))
+        puts !(@A || @B && !(@C || (!@A || @B)))
+        puts @X**2 + @Y**2 >= 1 && @X >= 0 && @Y >= 0
+        puts (@A && (@C && @B) <=> (@B || @A) || @C) && @B
     end
 end
 
 
 calc = Calc.new
-puts calc.count(1) #default
-puts calc.count() #custom
+calc.count(1) #default
+#calc.count() #custom
