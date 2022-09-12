@@ -1,6 +1,6 @@
 class Counter
     def initialize()
-        @x = -9.5252
+        @x = 9.5252
     end
 
     def count(default = false, type = "case")
@@ -20,9 +20,9 @@ class Counter
             puts "Out of range"
             return nil
         when -4.0..0.0
-            return ((@x-2).abs / (@x**2)*Math.cos(@x))**(1/7)
+            return ((@x-2.0).abs / (@x**2)*Math.cos(@x))**(1.0/7.0)
         when 0.0..12.0
-            return 1 / (Math.tan(@x + 1/(Math::E**@x))/(Math.sin(@x)**2))**(2/7)
+            return 1.0 / (Math.tan(@x + 1.0/(Math::E**@x))/(Math.sin(@x)**2))**(2.0/7.0)
         else
             return 1/(1+@x/(1+@x/(1+@x)))
         end
@@ -33,9 +33,9 @@ class Counter
             puts "Out of range"
             return nil
         elsif @x <= 0.0 && @x > -4.0
-            return ((@x-2).abs / (@x**2)*Math.cos(@x))**(1/7)
+            return ((@x-2.0).abs / (@x**2)*Math.cos(@x))**(1.0/7.0)
         elsif @x <= 12.0 && @x > 0.0
-            return 1 / (Math.tan(@x + 1/(Math::E**@x))/(Math.sin(@x)**2))**(2/7)
+            return 1.0 / (Math.tan(@x + 1.0/(Math::E**@x))/(Math.sin(@x)**2))**(2.0/7.0)
         else
             return 1/(1+@x/(1+@x/(1+@x)))
         end

@@ -40,4 +40,4 @@ end
 counter = Counter.new
 puts "Sum = #{counter.count1(1)}" #default
 puts "Sum = #{counter.count2()}" #default
-#puts "Dec = #{counter.count()}" #custom
+#puts "Sum = #{counter.count1()}" #custom
