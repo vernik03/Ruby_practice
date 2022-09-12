@@ -28,4 +28,4 @@ end
 counter = Counter.new
 puts "Range = #{counter.count(1)}" #default
 puts "Range = #{counter.count(1).to_f}" #default, float
-#puts "Range = #{polynom.square()}" #custom
+puts "Range = #{counter.count()}" #custom
