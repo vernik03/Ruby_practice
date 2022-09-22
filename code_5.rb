@@ -26,9 +26,9 @@ class Counter
         @N = 10
         @c = 4
         readInput() if !default
-        @v_data_1 = Hash.new
-        @v_data_2 = Hash.new
-        @v_data_3 = Hash.new
+        @v_data_1 = []
+        @v_data_2 = []
+        @v_data_3 = []
         @v_data_x = []
     end
 
@@ -50,59 +50,37 @@ class Counter
 
 
     def visualize(text, number, v_data)
+        interpolations=["linear","step-before","step-after","polar","polar-reverse", "basis", "cardinal"]
 
-        # vis = Rubyvis::Panel.new do 
-        #     width 800
-        #     height 700
-        #     bar do
-        #       data v_data
-        #       width 20
-        #       height {|d| d*600/v_data.max}
-        #       bottom(0)
-        #       left {index * 25}
-        #     end
-
-        # data = pv.range(0, 10, 1).map {|x| 
-        #     OpenStruct.new({:x=> x, :y=> Math.sin(x) + 2+rand()*0.2})
-        #   }
-
-          data = to_recursive_ostruct(v_data)
-          
-          p_w=800
-          p_h=600
-          #p data
-          w = 20+p_w*2
-          h = 20+p_h*4
-          
-          x = pv.Scale.linear(v_data, lambda {|d| d.x}).range(0, p_w-30)
-          
-          
-          y = pv.Scale.linear(v_data, lambda {|d| d.y}).range(0, p_h-20);
-          
-          interpolations=["linear","step-before","step-after","polar","polar-reverse", "basis", "cardinal"]
-          
-          #/* The root panel. */
-          vis = pv.Panel.new()
-            .width(w)
-            .height(h)
-            .bottom(20)
-            .left(20)
-            .right(10)
-            .top(5)
-          
-            n=0
-            m=(0).floor
-            panel=vis.add(Rubyvis::Panel).
-            left(n*(p_w+10)).
-            top(m*(p_h+10)).
-            width(p_w).
-            height(p_h)
-            panel.anchor('top').add(Rubyvis::Label).text(text)
-            panel.add(Rubyvis::Line).data(data).
-            line_width(2).
-            left(lambda {|d| x.scale(d.x)}).
-            bottom(lambda {|d| y.scale(d.y)}).
-            interpolate("basis")
+        data = v_data
+        p_w=300
+        p_h=200
+        w = 20+p_w*2
+        h = 20+p_h*4
+        x = pv.Scale.linear(data, lambda {|d| d.x}).range(0, p_w-30)
+        y = pv.Scale.linear(data, lambda {|d| d.y}).range(0, p_h-20)  
+        
+        vis = pv.Panel.new()
+        .width(w)
+        .height(h)
+        .bottom(20)
+        .left(20)
+        .right(10)
+        .top(5)
+        
+        n=0
+        m=(0).floor
+        panel=vis.add(Rubyvis::Panel).
+        left(n*(p_w+10)).
+        top(m*(p_h+10)).
+        width(p_w).
+        height(p_h)
+        panel.anchor('top').add(Rubyvis::Label).text(text)
+        panel.add(Rubyvis::Line).data(data).
+        line_width(2).
+        left(lambda {|d| x.scale(d.x)}).
+        bottom(lambda {|d| y.scale(d.y)}).
+        interpolate(interpolations[6])
            
         vis.render
         file = File.new("./svg/task_5_" + number.to_s + ".svg", "w:UTF-8")
@@ -111,45 +89,50 @@ class Counter
     end
 
     def count1()
-        for i in 2..@N
+        for i in 1..@N
             for j in 0..(@c-1)
                 if i == @N
-                    @v_data_1[i] = y(i.to_f)
+                    @v_data_1 << OpenStruct.new(:x=>i, :y=> y(i.to_f))
                     break
                 end
-                @v_data_1[i] = y((i + (1.0/@c)*j).to_f)
+                @v_data_1 << OpenStruct.new(:x=>i, :y=> y((i + (1.0/@c)*j).to_f)) 
             end
         end
-        print @v_data_1
-        # visualize(1, @v_data_1)
+        puts
+        @v_data_1.each {|elem| print elem.y, " " } 
+        puts
+        visualize("y(x)",1, @v_data_1)
     end
 
     def count2()
         i = Math::PI/@N
         while i <= Math::PI
-            @v_data_2[i] = z(i)
-            @v_data_x.push(i.to_f)
+            @v_data_2 << OpenStruct.new(:x=>i, :y=> z(i))
             i += (Math::PI - Math::PI/@N) / ((3.0/2.0)*@N + @c)
         end
-        print @v_data_2
-        # visualize("z(x)", 2, @v_data_2)
+        puts
+        @v_data_2.each {|elem| print elem.y, " " } 
+        puts
+        visualize("z(x)", 2, @v_data_2)
     end
 
     def count3()
         i = 2
         while i <= @c
             case i
-            when 2...@N
-                @v_data_3[i] = y(i.to_f)
+            when 2...@N                
+                @v_data_3 << OpenStruct.new(:x=>i, :y=> y(i.to_f))
             when @N...(2*@N)
-                @v_data_3[i] = z(i.to_f)
+                @v_data_3 << OpenStruct.new(:x=>i, :y=> z(i.to_f))
             else
-                @v_data_3[i] = y(i.to_f) + z(i.to_f)
+                @v_data_3 << OpenStruct.new(:x=>i, :y=> y(i.to_f) + z(i.to_f))
             end
             i += ((@c-2.0)/(2.0*@N))
         end
-        print @v_data_3
-        # visualize(3, @v_data_3)
+        puts
+        @v_data_3.each {|elem| print elem.y, " " } 
+        puts
+        visualize("y(x) + z(x)", 3, @v_data_3)
     end
 
     def y(x)
