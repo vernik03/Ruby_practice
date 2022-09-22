@@ -3,7 +3,7 @@ class Counter
         @x = 2.0
     end
 
-    def count1(default = false)
+    def count1(default = true)
         readInput() if !default
         return countResult1()
     end
@@ -38,6 +38,6 @@ end
 
 
 counter = Counter.new
-puts "Sum = #{counter.count1(1)}" #default
+puts "Sum = #{counter.count1()}" #default
 puts "Sum = #{counter.count2()}" #default
-#puts "Sum = #{counter.count1()}" #custom
+#puts "Sum = #{counter.count1(0)}" #custom

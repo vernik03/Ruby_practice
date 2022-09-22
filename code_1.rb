@@ -9,7 +9,7 @@ class Calc
         @Z = -50
     end
 
-    def count(default = false)
+    def count(default = true)
         readInput() if !default
         return printResult()
     end
@@ -42,5 +42,5 @@ end
 
 
 calc = Calc.new
-calc.count(1) #default
-#calc.count() #custom
+calc.count() #default
+#calc.count(0) #custom

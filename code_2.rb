@@ -3,7 +3,7 @@ class Counter
         @x = 9.5252
     end
 
-    def count(default = false, type = "case")
+    def count(type = "case", default = true)
         readInput() if !default
         return countResultCase() if type == "case"
         return countResultIf() if type == "if"
@@ -44,6 +44,7 @@ end
 
 
 counter = Counter.new
-puts "y = #{counter.count(1, "case")}" #default
-puts "y = #{counter.count(1, "if")}" #default
-#puts "Dec = #{counter.count()}" #custom
+puts "y = #{counter.count("case")}" #default
+puts "y = #{counter.count("if")}" #default
+# puts "y = #{counter.count("case", 0)}" #custom
+# puts "y = #{counter.count("if", 0)}" #custom
