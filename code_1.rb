@@ -1,31 +1,47 @@
-class Calc
-     def initialize()
-        @A = []
-        12.times do
-            @A << rand(10)
-        end
-        puts "Массив А: #{@A}" 
-    end
+f1 = lambda { |x| 1/((x+1)*Math.sqrt(x**2 + 1)) } # лямбда с одним аргументов
 
-    def count_groups()
-        temp_s = nil
-        count = 0
-        for i in 0..@A.size-1
-            if @A[i] == @A[i+1] or @A[i] == temp_s
-                if temp_s == @A[i]
-                    print " #{@A[i]}"
-                else
-                    temp_s = @A[i]
-                    count += 1
-                    print "\n#{count} группа: #{ @A[i]}" 
-                end
-            else
-                temp_s = nil
-            end
-        end   
+f2 = lambda { |x| Math.tan(x/2 + Math::PI/4)**3 }
+
+# вычисление интеграла методом прямоугольников на интервале [a, b]
+def prm(a, b, f, eps)
+    n = 1
+    s = 0
+    while true
+        h = (b-a)/n
+        s1 = 0
+        for i in 0..n-1
+            s1 += f.call(a + i*h)
+        end
+        s1 *= h
+        if (s1 - s).abs < eps
+            return s1
+        end
+        s = s1
+        n *= 2
     end
 end
 
 
-calc = Calc.new
-calc.count_groups() 
+# вычисление интеграла методом трапеций на интервале [a, b]
+def trp(a, b, f, eps)
+    n = 1
+    s = 0
+    while true
+        h = (b - a) / n
+        s1 = 0
+        for i in 1..n-1
+            s1 += f.call(a + i*h)
+        end
+        s1 = (s1 + (f.call(a) + f.call(b))/2) * h
+        if (s1 - s).abs < eps
+            return s1
+        end
+        s = s1
+        n *= 2
+    end
+end
+
+puts prm(0.0, 1.0, f1, 0.0001)
+puts trp(0.0, 1.0, f1, 0.0001)
+puts prm(0.0, Math::PI/4, f2, 0.0001)
+puts trp(0.0, Math::PI/4, f2, 0.0001)
