@@ -1,50 +1,38 @@
-class Counter
+class Calc
     def initialize()
-        @x = 9.5252
-    end
-
-    def count(type = "case", default = true)
-        readInput() if !default
-        return countResultCase() if type == "case"
-        return countResultIf() if type == "if"
-    end
-
-    def readInput()
-        print "Enter x: "
-        @x = gets.chomp.to_f
-    end
-
-    def countResultCase()
-        case @x
-        when -4.0
-            puts "Out of range"
-            return nil
-        when -4.0..0.0
-            return ((@x-2.0).abs / (@x**2)*Math.cos(@x))**(1.0/7.0)
-        when 0.0..12.0
-            return 1.0 / (Math.tan(@x + 1.0/(Math::E**@x))/(Math.sin(@x)**2))**(2.0/7.0)
-        else
-            return 1/(1+@x/(1+@x/(1+@x)))
+        @B = Array.new(8) { Array.new(8) }
+        for i in 0..@B.size-1
+            for j in 0..@B.size-1
+                if i == j
+                    @B[i][j] = 1
+                else
+                    @B[i][j] = rand(10)
+                end
+            end
         end
+   end
+
+    def print_matrix()
+        for i in 0..@B.size-1
+            for j in 0..@B.size-1
+                print "#{@B[i][j]}\t"
+            end
+            puts
+        end
+        puts
     end
 
-    def countResultIf()
-        if @x == -4.0
-            puts "Out of range"
-            return nil
-        elsif @x <= 0.0 && @x > -4.0
-            return ((@x-2.0).abs / (@x**2)*Math.cos(@x))**(1.0/7.0)
-        elsif @x <= 12.0 && @x > 0.0
-            return 1.0 / (Math.tan(@x + 1.0/(Math::E**@x))/(Math.sin(@x)**2))**(2.0/7.0)
-        else
-            return 1/(1+@x/(1+@x/(1+@x)))
+    def multiply_matrix(num)
+        for i in 0..@B.size-1
+            for j in 0..@B.size-1
+                @B[i][j] *= num
+            end
         end
     end
 end
 
 
-counter = Counter.new
-puts "y = #{counter.count("case")}" #default
-puts "y = #{counter.count("if")}" #default
-# puts "y = #{counter.count("case", 0)}" #custom
-# puts "y = #{counter.count("if", 0)}" #custom
+calc = Calc.new
+calc.print_matrix()
+calc.multiply_matrix(2)
+calc.print_matrix()

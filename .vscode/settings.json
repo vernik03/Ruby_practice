@@ -1,0 +1,19 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "178.159.224.36",
+            "port": 3307,
+            "driver": "MySQL",
+            "name": "starbattle",
+            "group": "server03",
+            "database": "starbattle",
+            "username": "vernik03",
+            "password": "server03",
+            "connectionTimeout": 15
+        }
+    ]
+}
