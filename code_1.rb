@@ -1,8 +1,7 @@
-f1 = lambda { |x| 1/((x+1)*Math.sqrt(x**2 + 1)) } # лямбда с одним аргументов
+f1 = lambda { |x| 1/((x+1)*Math.sqrt(x**2 + 1)) } 
 
 f2 = lambda { |x| Math.tan(x/2 + Math::PI/4)**3 }
 
-# вычисление интеграла методом прямоугольников на интервале [a, b]
 def prm(a, b, f, eps)
     n = 1
     s = 0
@@ -21,8 +20,6 @@ def prm(a, b, f, eps)
     end
 end
 
-
-# вычисление интеграла методом трапеций на интервале [a, b]
 def trp(a, b, f, eps)
     n = 1
     s = 0
