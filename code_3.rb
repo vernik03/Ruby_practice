@@ -13,6 +13,13 @@ class Calc
         puts
     end
 
+    def print_result()
+        for i in 0..@b.size-1
+            puts "#{@b[i]} "
+        end
+        puts
+    end
+
     def set_matrix(size)
         if size >= 3 and size <= 9
             @A = Array.new(size) { Array.new(size) }
@@ -31,7 +38,6 @@ class Calc
         end
     end
 
-    # решить систему линейных уравнений методом исключения Гаусса и получить значения неизвестных x1, x2, x3, ..., xn
     def solve()
         for i in 0..@A.size-1
             for j in 0..@A.size-1
@@ -57,4 +63,4 @@ size = gets.to_i
 calc = Calc.new(size)
 calc.print_matrix()
 calc.solve()
-calc.print_matrix()
+calc.print_result()
