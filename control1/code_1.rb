@@ -9,12 +9,12 @@ end
 
 class Student
 
-    #empty constructor
+    #full constructor
     def initialize(id, surname, name, patronymic, birth_date, address, phone, faculty, course, group)  
         @id, @surname, @name, @patronymic, @birth_date, @address, @phone, @faculty, @course, @group = id, surname, name, patronymic, birth_date, address, phone, faculty, course, group      
     end
 
-    #required constructor 
+    #minimal constructor 
     def Student.minimal(id, surname, name, birth_date, faculty, course, group)
         new(id, surname, name, "", birth_date, "", "", faculty, course, group)
     end
@@ -200,5 +200,5 @@ manager.fill_students()
 
 # manager.get_students_by_faculty(Faculty::Phylosophy)
 # manager.get_students_by_faculty_and_course()
-# manager.get_students_by_birth_date(2004)
+manager.get_students_by_birth_date(2004)
 # manager.get_students_by_group("K19")
