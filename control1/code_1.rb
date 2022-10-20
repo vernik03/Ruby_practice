@@ -39,68 +39,28 @@ class Student
     end
 
     #getters
-    def get_id()
-        @id
-    end
-    def get_surname()
-        @surname
-    end
-    def get_name()
-        @name
-    end
-    def get_patronymic()
-        @patronymic
-    end
-    def get_birth_date()
-        @birth_date
-    end
-    def get_address()
-        @address
-    end
-    def get_phone()
-        @phone
-    end
-    def get_faculty()
-        @faculty
-    end
-    def get_course()
-        @course
-    end
-    def get_group()
-        @group
-    end
+    def get_id() @id end
+    def get_surname() @surname end
+    def get_name() @name end
+    def get_patronymic() @patronymic end
+    def get_birth_date() @birth_date end
+    def get_address() @address end
+    def get_phone() @phone end
+    def get_faculty() @faculty end
+    def get_course() @course end
+    def get_group() @group end
 
     #setters
-    def set_id(id)
-        @id = id
-    end
-    def set_surname(surname)
-        @surname = surname
-    end
-    def set_name(name)
-        @name = name
-    end
-    def set_patronymic(patronymic)
-        @patronymic = patronymic
-    end
-    def set_birth_date(birth_date)
-        @birth_date = birth_date
-    end
-    def set_address(address)
-        @address = address
-    end
-    def set_phone(phone)
-        @phone = phone
-    end
-    def set_faculty(faculty)
-        @faculty = faculty
-    end
-    def set_course(course)
-        @course = course
-    end
-    def set_group(group)
-        @group = group
-    end
+    def set_id(id) @id = id end
+    def set_surname(surname) @surname = surname end
+    def set_name(name) @name = name end
+    def set_patronymic(patronymic) @patronymic = patronymic end
+    def set_birth_date(birth_date) @birth_date = birth_date end
+    def set_address(address) @address = address end
+    def set_phone(phone) @phone = phone end
+    def set_faculty(faculty) @faculty = faculty end
+    def set_course(course) @course = course end
+    def set_group(group) @group = group end
 
     #to string
     def toString()
