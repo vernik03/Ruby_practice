@@ -10,32 +10,13 @@ end
 class Student
 
     #empty constructor
-    def initialize()        
+    def initialize(id, surname, name, patronymic, birth_date, address, phone, faculty, course, group)  
+        @id, @surname, @name, @patronymic, @birth_date, @address, @phone, @faculty, @course, @group = id, surname, name, patronymic, birth_date, address, phone, faculty, course, group      
     end
 
     #required constructor 
-    def initialize(id, surname, name, birth_date, faculty, course, group)
-        @id = id
-        @surname = surname
-        @name = name
-        @birth_date = birth_date
-        @faculty = faculty
-        @course = course
-        @group = group
-    end
-
-    #full constructor
-    def initialize(id, surname, name, patronymic, birth_date, address, phone, faculty, course, group)
-        @id = id
-        @surname = surname
-        @name = name
-        @patronymic = patronymic
-        @birth_date = birth_date
-        @address = address
-        @phone = phone
-        @faculty = faculty
-        @course = course
-        @group = group
+    def Student.minimal(id, surname, name, birth_date, faculty, course, group)
+        new(id, surname, name, "", birth_date, "", "", faculty, course, group)
     end
 
     #getters
@@ -82,8 +63,12 @@ class Student
 end
 
 class StudentManager
-    def initialize()   
-        @students = Array.new     
+    def initialize(array)   
+        @students = array 
+    end
+
+    def StudentManager.empty()
+        new(Array.new)
     end
 
     def add_student(student)
@@ -114,7 +99,7 @@ class StudentManager
         puts()
         puts("Mathematics: ")
         for i in 1..4
-            print("Course #{i}: ")
+            puts("Course #{i}: ")
             print_students(@students.select { |student| student.get_faculty() == Faculty::Mathematics && student.get_course() == i })
         end
         puts()
@@ -210,10 +195,10 @@ class StudentManager
 end
 
 
-manager = StudentManager.new()
+manager = StudentManager.empty()
 manager.fill_students()
 
 # manager.get_students_by_faculty(Faculty::Phylosophy)
 # manager.get_students_by_faculty_and_course()
 # manager.get_students_by_birth_date(2004)
-manager.get_students_by_group("P35")
+# manager.get_students_by_group("K19")

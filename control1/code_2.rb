@@ -1,18 +1,22 @@
 
 class Counter
-    def initialize()     
-        readInput()
-        count()
-    end
+    
 
-    def initialize(a, b, c, x_start, x_end, x_step)
+    def initialize(a, b, c, x_start, x_end, x_step, is_read = false)
         @a = a
         @b = b
         @c = c
         @x_start = x_start
         @x_end = x_end
         @x_step = x_step
+        if is_read
+            readInput()
+        end
         count()
+    end
+
+    def Counter.read()  
+        new(0, 0, 0, 0, 0, 0, 1)
     end
 
     def count()
@@ -58,5 +62,5 @@ class Counter
 end
 
 
-# counter = Counter.new(3,0,2,-3,3,0.1)
-counter = Counter.new()
+counter = Counter.new(3,0,2,-3,3,0.1)
+counter = Counter.read()
