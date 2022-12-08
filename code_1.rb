@@ -1,88 +1,171 @@
-class LuggageCompartment
+# Реалізувати ієрархію з 3 об'єктів. Реалізувати методи пошуку та отримання списку відсортованих об'єктів
+
+# 1.Бібліотека публікацій. Визначити ієрархію наукових публікацій. Підібрати список публікацій з бібліотеки, на які посилається обрана публікація. Забезпечити пошук публікацій за бібліографічними даними і за ключовими словами. Надати вибірку публікацій з сортуванням за релевантністю пошуковому запиту.
+
+class Library
     def initialize()
-        @luggage = Struct.new(:number, :weight)
-        @all_luggage = []
+        @all_articles = []
     end
 
-    def add_luggage(number, weight)
-        @all_luggage << @luggage.new(number, weight)
+    def add_article(name, author, year, pages, keywords, references_names, type)        
+        references = []
+        for reference in references_names do
+            references << find_article_by_name(reference)
+        end
+        case type
+        when "Physics"
+            @all_articles << PhysicsScientificArticle.new(name, author, year, pages, keywords, references)
+        when "Math"
+            @all_articles << MathScientificArticle.new(name, author, year, pages, keywords, references)
+        when "Political"
+            @all_articles << PoliticalPublicisticArticle.new(name, author, year, pages, keywords, references)
+        when "Economic"
+            @all_articles << EconomicPublicisticArticle.new(name, author, year, pages, keywords, references)
+        when "Social"
+            @all_articles << SocialAddvertismentArticle.new(name, author, year, pages, keywords, references)
+        when "Commercial"
+            @all_articles << CommercialAddvertismentArticle.new(name, author, year, pages, keywords, references)
+        end
     end
 
-    def task_a()
-        puts "a)"
-        average_weight =  @all_luggage.inject(0){|sum, luggage| sum + luggage.weight } / @all_luggage.inject(0){|sum, luggage| sum + luggage.number }
-        puts "Average weight: #{average_weight}" 
-        @all_luggage.select {|luggage| puts "luggage: #{luggage.number} things, #{luggage.weight} kg"  if ((luggage.weight / luggage.number) - average_weight).abs <= 0.3}     
+    def find_article_by_name(name)
+        result =  @all_articles.select {|article| article.name == name}
+        result.sort_by {|article| article.name}
+        return result
     end
 
-    def task_b()
-        puts "b)"
-        puts "More than two things: #{@all_luggage.select {|luggage| luggage.number > 2}.count}"
-        average_number =  @all_luggage.inject(0){|sum, luggage| sum + luggage.number } / @all_luggage.count
-        puts "More than average number of things: #{@all_luggage.select {|luggage| luggage.number > average_number}.count}"
+    def find_article_by_author(author)
+        result =  @all_articles.select {|article| article.author == author}
+        result.sort_by {|article| article.author}
+        return result
     end
-    
-    def task_c()
-        puts "c)"
-        temp = []
-        @all_luggage.each do |luggage|
-            @all_luggage.each do |luggage2|
-                if luggage.number == luggage2.number && (luggage.weight - luggage2.weight).abs <= 0.5 &&
-                    luggage != luggage2 && !temp.include?([luggage, luggage2]) && !temp.include?([luggage2, luggage])
-                    puts "luggage: #{luggage.number} things, #{luggage.weight} kg and #{luggage2.weight} kg"
-                    temp << [luggage, luggage2]
+
+    def find_article_by_keywords(keywords)
+        result = []
+        for article in @all_articles do
+            for key in keywords do
+                for word in article.keywords do
+                    if word == key
+                        result << article
+                        break
+                    end
                 end
             end
         end
-        if temp.empty?
-            puts "No such luggage"
+        result.sort_by {|article| article.name}
+        return result
+    end
+    
+    def print_all_articles
+        for article in @all_articles do
+            article.print_article
         end
     end
-
-    def task_d()
-        puts "d)"
-        temp_l = @luggage.new(0, 0)
-        @all_luggage.each do |luggage|
-            if luggage.number > temp_l.number && luggage.weight > temp_l.weight
-                temp_l = luggage
-            end
+    
+    def print_articles(articles)
+        for article in articles do
+            article.print_article
         end
-        if temp_l.number != 0 && temp_l.weight != 0
-            puts "Max luggage: #{temp_l.number} things, #{temp_l.weight} kg"
-        else
-            puts "No max luggage"
-        end
-    end
-
-    # выяснить, имеется ли пассажир, багаж которого состоит из одной вещи менее 30 кг
-    def task_e()
-        puts "e)"
-        @all_luggage.select {|luggage| puts "luggage: #{luggage.number} things, #{luggage.weight} kg"  if (luggage.number == 1 && luggage.weight < 30)}
     end
 
 end
 
+class Article
+    attr_accessor :name, :author, :year, :pages, :keywords, :references, :type
 
-luggage_compartment = LuggageCompartment.new()
-luggage_compartment.add_luggage(5, 2.5)
-luggage_compartment.add_luggage(6, 5.0)
-luggage_compartment.add_luggage(7, 8.8)
-luggage_compartment.add_luggage(9, 9.0)
-luggage_compartment.add_luggage(4, 2.1)
-luggage_compartment.add_luggage(2, 0.5)
-luggage_compartment.add_luggage(5, 0.5)
-luggage_compartment.add_luggage(2, 1.2)
-luggage_compartment.add_luggage(3, 1.9)
-luggage_compartment.add_luggage(8, 2.9)
-luggage_compartment.add_luggage(4, 1.7)
-luggage_compartment.add_luggage(2, 8.1)
-luggage_compartment.add_luggage(6, 4.6)
-luggage_compartment.add_luggage(10, 11.5)
-luggage_compartment.add_luggage(1, 1.5)
-luggage_compartment.add_luggage(1, 0.5)
-luggage_compartment.task_a()
-luggage_compartment.task_b()
-luggage_compartment.task_c()
-luggage_compartment.task_d()
-luggage_compartment.task_e()
+    def initialize(name, author, year, pages, keywords, references)        
+        @name = name
+        @author = author
+        @year = year
+        @pages = pages
+        @keywords = keywords
+        @references = references
+        @type = nil
+    end 
 
+    def print_references
+        puts "References for #{@name}:"
+        for reference in @references do
+            puts reference.name
+        end
+    end
+
+    def print_article
+        puts "Article: #{@name}, #{@author}, #{@year}, #{@pages}, #{@keywords}, #{type}"
+    end
+end
+
+class ScientificArticle  < Article
+    def initialize(name, author, year, pages, keywords, references)
+        super(name, author, year, pages, keywords, references)
+    end
+end
+
+class PhysicsScientificArticle < ScientificArticle
+    def initialize(name, author, year, pages, keywords, references)
+        super(name, author, year, pages, keywords, references)
+        @type = "Physics"
+    end
+end
+
+class MathScientificArticle < ScientificArticle
+    def initialize(name, author, year, pages, keywords, references)
+        super(name, author, year, pages, keywords, references)
+        @type = "Math"
+    end
+end
+
+class PublicisticArticle < Article
+    def initialize(name, author, year, pages, keywords, references)
+        super(name, author, year, pages, keywords, references)
+    end
+end
+
+class PoliticalPublicisticArticle < PublicisticArticle
+    def initialize(name, author, year, pages, keywords, references)
+        super(name, author, year, pages, keywords, references)
+        @type = "Political"
+    end
+end
+
+class EconomicPublicisticArticle < PublicisticArticle
+    def initialize(name, author, year, pages, keywords, references)
+        super(name, author, year, pages, keywords, references)
+        @type = "Economic"
+    end
+end
+
+class AddvertismentArticle < Article
+    def initialize(name, author, year, pages, keywords, references)
+        super(name, author, year, pages, keywords, references)
+    end
+end
+
+class SocialAddvertismentArticle < AddvertismentArticle
+    def initialize(name, author, year, pages, keywords, references)
+        super(name, author, year, pages, keywords, references)
+        @type = "Social"
+    end
+end
+
+class CommercialAddvertismentArticle < AddvertismentArticle
+    def initialize(name, author, year, pages, keywords, references)
+        super(name, author, year, pages, keywords, references)
+        @type = "Commercial"
+    end
+end
+
+library = Library.new()
+library.add_article("Publication1", "Author1", 2010, 10, ["keyword1", "keyword5"], ["Article2", "Article4"], "Physics")
+library.add_article("Publication2", "Author2", 2011, 11, ["keyword1", "keyword7"], ["Article1", "Article4"], "Math")
+library.add_article("Publication3", "Author3", 2012, 12, ["keyword2", "keyword3"], ["Article4", "Article5"], "Political")
+library.add_article("Publication4", "Author1", 2013, 13, ["keyword4", "keyword6"], ["Article2"], "Economic")
+library.add_article("Publication5", "Author5", 2014, 14, ["keyword2", "keyword5"], ["Article3"], "Social")
+library.add_article("Publication6", "Author6", 2015, 15, ["keyword6", "keyword4"], ["Article1"], "Commercial")
+library.print_all_articles()
+puts " "
+library.print_articles(library.find_article_by_name("Publication3"))
+puts " "    
+library.print_articles(library.find_article_by_author("Author1"))
+puts " "
+library.print_articles(library.find_article_by_keywords(["keyword1", "keyword2"]))
